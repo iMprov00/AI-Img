@@ -16,7 +16,7 @@ namespace AI_Img
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main_img2img());
+            Application.Run(new Authorization());
         }
     }
 }

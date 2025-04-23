@@ -217,8 +217,47 @@
   <data name="bunifuLabel1.BaseStylesheet" xml:space="preserve">
     <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 14,25pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
   </data>
+  <data name="neg_text.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAOsAAAAhCAYAAAA4eVwHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALuSURBVHhe7d2/bxJxGAbwGzs6Mjo6OnZ07GRcTBwdjX+B
+        o4ODiZuDg5uz/4CTcD/gCiEUQoLEhCMXQs4I5IoEES/kfB/6GtMWKFrkvmmeT/IOzdFjenjv+wssIrqh
+        8vn8odTzYrHoS524rjsoFAopi8VaX8gJ8oJCfqSONFK7JTe+JW/y1nGccaVSibvdbjoajdI4jtPZbJYS
+        0WbICfKCQn5qtVps23bied57yddtjdr1yCfCS7lhHIZhMp/P9a2J6LoWi0UaRVFaKpViNEMJ7YHG7u9o
+        Ny13Op1ZkiR6eyLaNYQWzVDy9llyl9MIbgdt2ff9T8PhkK2UaE8mkwm6bCT5u6tR3AwdFUHFPxLRfmGo
+        Kfn7ioapkVwPj77sqETZmU6n6LABGqfG8jIJ6usgCDi9S5SxKIp+SmA/aDTPkxTnPM8bY7BLRNk7Pj4+
+        XTl+xdQxZqT0dUSUscFgkEouP2pEz0h6DxzH+cYlGiKzuK47xVOvRnUZ1iPsqNDrRGSIdruNsD7RqC53
+        Kb3p9Xp6mYhMcelRWP7wsdeXiMyCZRxppn2NqmV5nhdwEwSReTCPZNv2d42qZeE0DTfpE5kJR+w0qssx
+        ax/tlojMgn0POEqnUV2OWU9wzo6IzIJzsNJMBxrV5Zj1Xb/f18tEZApM/GICWKO6XGd93Gq1OMNEZJgg
+        CBJ5DH6hUT07Fuc4zg+9TkSGWLk/GAuvWIAlIjNgORXLqhrRP5BepFhfR0QZazQa6KoPNKLnsbsSmWFt
+        V/1NUpzzfT/k14sSZQe7lsrl8hfJ4x2N5mr6ODzkIXSibNTr9ZHrug81kptJ+72PwHILItH+oKMiqDIc
+        fapR3A46LL4WkTubiP4/jFHx6Lt1R70IY1hsRaxWqzFP5RDtHuaHms3mGJNJV45RtyE3uYebSacddzqd
+        BN2WY1qif4P8hGGY4nejsO9X8vVIo7Y7SL7UM3RbnAS4+EtZLBbr6kJ+HMd5JVk61GgR0c1hWb8AhlgP
+        5JfowbAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="bunifuLabel5.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 12pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
   <data name="bunifuLabel2.BaseStylesheet" xml:space="preserve">
     <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 14,25pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
+  <data name="bunifuCheckBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEWSURBVDhP7ZShDsIwEIYnkUgEUCQSiUQieQTkJBI5h+xG
+        SJBIHgGJ5BGQSCQSd8fddrQbLYNVoPiTP0vW/77cbm2jn0utcdjTOCcnFacQqwzGEvsstcNWP4MVFd77
+        KeJHZ7BXG+xIuSulcUSwsy0oFZf98p5qbl2NM8FYcYe0ePEV1Vqy/GXU1EBwhegztk5BY8NBcKbL72b4
+        ztKx6ZZn6YQCbWbb07DwBULMW06gmPgCIf5DBZri0hcIsYF2M5j6Ao1sT1acQ2mftssLQbabf5RDWXTE
+        jk6wofnuEFyh/O58HtXGHQPwk8coOCueRyVcB+e1yjpowbjiG53gpwqgxpS9ejv0SeAxbxGvaRvST5lI
+        vKQoegDoo4R9UUMEPwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="bunifuLabel4.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 12pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
+  <data name="bunifuLabel3.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 12pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
   </data>
   <data name="bunifuButton28.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -237,6 +276,12 @@
         o36//zil6U9VVQ8JFmjVkTp8npJcPGmHPXAWAXCzDi/dUefHnmEVbCljZ0EAK6TOJjIQ/xl1mdFC920R
         vU6E/6EDrJZthiN5kpK7/ljx8kJstyVa4BpSR6/1bLqZErtkiuIPKbVxJVdLBigAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="label_user.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Courier New'; font-size: 14,25pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
+  <data name="lblStatus.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; margin: auto; padding-top: 1px;font-family: 'Courier New'; font-size: 12pt; width: 100%; height: 100%; font-style: italic; font-weight: bold; text-decoration: none; color: rgb(106, 90, 205); text-align: center; }</value>
   </data>
   <data name="picResult.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -338,9 +383,6 @@
         X2g+HTT/CDcehS/8FipoEU8ViEUEAADwJe12uxgzzWg0Wg4GgzJ0yuOPnH1KrKB4TFqv11vGf2xjZmZm
         Zmb2pVaW5du6rl+GLnmeEgUAAOBrUxTvANF0DBYYl0hhAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="lblStatus.BaseStylesheet" xml:space="preserve">
-    <value>#bunifu-label { padding: 0px; margin: auto; padding-top: 1px;font-family: 'Courier New'; font-size: 12pt; width: 100%; height: 100%; font-style: italic; font-weight: bold; text-decoration: none; color: rgb(106, 90, 205); text-align: center; }</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

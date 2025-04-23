@@ -10,6 +10,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace AI_Img
 {
@@ -24,11 +26,12 @@ namespace AI_Img
           //  this.FormBorderStyle = FormBorderStyle.None;
             InitializeComponent();
             httpClient.Timeout = TimeSpan.FromMinutes(5);
-
+    
         }
 
         private void Main_img2img_Load(object sender, EventArgs e)
         {
+            bunifuLabel2.Text = $"{UserData.Name}";
             picResult.Image = null;
         }
 
@@ -51,6 +54,11 @@ namespace AI_Img
                 lblStatus.Text = "Введите текстовый запрос (prompt)";
                 return;
             }
+            if (string.IsNullOrWhiteSpace(bunifuDropdown1.Text))
+            {
+                lblStatus.Text = "Выберите модель генерации";
+                return;
+            }
             lblStatus.Visible = true;
 
             isGenerating = true;
@@ -64,11 +72,11 @@ namespace AI_Img
                 var payload = new
                 {
                     token = API_KEY,
-                    model = "HUBGSexFlux.1-Alpha", // Или другая модель для txt2img
+                    model = bunifuDropdown1.Text, // Или другая модель для txt2img
                     prompt = txtPrompt.Text,
-                    negative_prompt = "low quality, blurry, bad anatomy",
-                    width = 1920, // Стандартный размер
-                    height = 1080,
+                    negative_prompt = neg_text.Text,
+                    width = 1024, // Стандартный размер
+                    height = 1024,
                     steps = 30,
                     sampler = "Euler",
                     cfg_scale = 7,
@@ -92,6 +100,12 @@ namespace AI_Img
                 {
                     await LoadResultImage(result.image_url);
                     lblStatus.Text = "Готово!";
+
+                    // Показываем уведомление о сохранении
+                    if (bunifuCheckBox1.Checked)
+                    {
+                        lblStatus.Text += " Изображение сохранено.";
+                    }
                 }
             }
             catch (Exception ex)
@@ -103,6 +117,7 @@ namespace AI_Img
                 isGenerating = false;
                 btnGenerate.Enabled = true;
             }
+
         }
 
         private void bunifuLabel3_Click(object sender, EventArgs e)
@@ -122,7 +137,11 @@ namespace AI_Img
                 var imageBytes = await httpClient.GetByteArrayAsync(url);
                 using (var ms = new MemoryStream(imageBytes))
                 {
-                    picResult.Image = Image.FromStream(ms);
+                    var image = Image.FromStream(ms);
+                    picResult.Image = image;
+
+                    // Сохраняем в БД если чекбокс активен
+                    SaveImageToDatabase(image);
                 }
             }
             catch (Exception ex)
@@ -142,6 +161,75 @@ namespace AI_Img
         private void Form1_Load(object sender, EventArgs e)
         {
             picResult.Image = null;
+        }
+
+        private void bunifuCheckBox1_CheckedChanged(object sender, Bunifu.UI.WinForms.BunifuCheckBox.CheckedChangedEventArgs e)
+        {
+/*            if (bunifuCheckBox1.Checked)
+            {
+                toolTip1.SetToolTip(bunifuCheckBox1, "Изображения будут сохраняться в вашу галерею");
+            }*/
+        }
+
+        private void bunifuButton25_Click(object sender, EventArgs e)
+        {
+            Authorization main = new Authorization();
+            main.Show();
+            this.Hide();
+        }
+
+        private void bunifuButton26_Click(object sender, EventArgs e)
+        {
+            Gallery main = new Gallery();
+            main.Show();
+            this.Hide();
+        }
+
+        private void SaveImageToDatabase(Image image)
+        {
+            if (!bunifuCheckBox1.Checked) return;
+
+            try
+            {
+                // Конвертируем Image в byte[]
+                byte[] imageData;
+                using (var ms = new MemoryStream())
+                {
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    imageData = ms.ToArray();
+                }
+
+                using (var connection = new SQLiteConnection("Data Source=img.db;Version=3;"))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO images (user_id, image) VALUES (@user_id, @image)";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@user_id", UserData.UserId);
+                        command.Parameters.AddWithValue("@image", imageData);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Изображение сохранено в базу данных");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}");
+            }
+        }
+
+        private void bunifuLabel5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuButton22_Click(object sender, EventArgs e)
+        {
+            Img2img main = new Img2img();
+            main.Show();
+            this.Hide();
         }
     }
 }
