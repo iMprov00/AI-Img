@@ -42,7 +42,56 @@ namespace AI_Img
 
         private void bunifuPictureBox2_Click(object sender, EventArgs e)
         {
+            if (picResult.Image != null)
+            {
+                var viewForm = new Form()
+                {
+                    Text = "Просмотр результата",
+                    StartPosition = FormStartPosition.CenterScreen,
+                    Size = new Size(800, 600)
+                };
 
+                var fullSizePictureBox = new PictureBox()
+                {
+                    Dock = DockStyle.Fill,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Image = picResult.Image
+                };
+
+                var panel = new Panel()
+                {
+                    Dock = DockStyle.Bottom,
+                    Height = 40,
+                    BackColor = Color.LightGray
+                };
+
+                var btnSave = new Button()
+                {
+                    Text = "Сохранить",
+                    Width = 100,
+                    Height = 30,
+                    Top = 5,
+                    Left = 10
+                };
+                btnSave.Click += (s, args) => SaveImageToFile(picResult.Image);
+
+                var btnClose = new Button()
+                {
+                    Text = "Закрыть",
+                    Width = 100,
+                    Height = 30,
+                    Top = 5,
+                    Left = viewForm.Width - 110
+                };
+                btnClose.Click += (s, args) => viewForm.Close();
+
+                panel.Controls.Add(btnSave);
+                panel.Controls.Add(btnClose);
+                viewForm.Controls.Add(panel);
+                viewForm.Controls.Add(fullSizePictureBox);
+
+                viewForm.ShowDialog();
+            }
         }
 
         private async void bunifuButton24_Click(object sender, EventArgs e)
@@ -230,6 +279,14 @@ namespace AI_Img
             Img2img main = new Img2img();
             main.Show();
             this.Hide();
+        }
+
+        private void bunifuButton23_Click(object sender, EventArgs e)
+        {
+            /*            Scale main = new Scale();
+                        main.Show();
+                        this.Hide();*/
+            MessageBox.Show("Сервис по улчшению на данный момент недоступен");
         }
     }
 }

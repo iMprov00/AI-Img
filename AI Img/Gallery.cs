@@ -215,5 +215,28 @@ namespace AI_Img
         {
             LoadUserImages();
         }
+
+        private void bunifuButton22_Click(object sender, EventArgs e)
+        {
+            Img2img main = new Img2img();
+            main.Show();
+            this.Hide();
+        }
+
+        private void bunifuButton23_Click(object sender, EventArgs e)
+        {
+            /*            Scale main = new Scale();
+                        main.Show();
+                        this.Hide();*/
+
+            MessageBox.Show("Сервис по улчшению на данный момент недоступен");
+        }
+
+        private void bunifuButton25_Click(object sender, EventArgs e)
+        {
+            Authorization main = new Authorization();
+            main.Show();
+            this.Hide();
+        }
     }
 }

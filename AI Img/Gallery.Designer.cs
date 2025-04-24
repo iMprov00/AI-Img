@@ -86,12 +86,12 @@
             this.bunifuPictureBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bunifuPictureBox4.AutoSizeHeight = false;
             this.bunifuPictureBox4.BackColor = System.Drawing.Color.Silver;
-            this.bunifuPictureBox4.BorderRadius = 5;
+            this.bunifuPictureBox4.BorderRadius = 24;
             this.bunifuPictureBox4.Image = global::AI_Img.Properties.Resources.user;
             this.bunifuPictureBox4.IsCircle = true;
             this.bunifuPictureBox4.Location = new System.Drawing.Point(15, 12);
             this.bunifuPictureBox4.Name = "bunifuPictureBox4";
-            this.bunifuPictureBox4.Size = new System.Drawing.Size(48, 49);
+            this.bunifuPictureBox4.Size = new System.Drawing.Size(48, 48);
             this.bunifuPictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.bunifuPictureBox4.TabIndex = 14;
             this.bunifuPictureBox4.TabStop = false;
@@ -554,6 +554,7 @@
             this.bunifuButton25.TextMarginLeft = 0;
             this.bunifuButton25.TextPadding = new System.Windows.Forms.Padding(0);
             this.bunifuButton25.UseDefaultRadiusAndThickness = true;
+            this.bunifuButton25.Click += new System.EventHandler(this.bunifuButton25_Click);
             // 
             // bunifuButton23
             // 
@@ -643,6 +644,7 @@
             this.bunifuButton23.TextMarginLeft = 0;
             this.bunifuButton23.TextPadding = new System.Windows.Forms.Padding(0);
             this.bunifuButton23.UseDefaultRadiusAndThickness = true;
+            this.bunifuButton23.Click += new System.EventHandler(this.bunifuButton23_Click);
             // 
             // bunifuButton22
             // 
@@ -732,6 +734,7 @@
             this.bunifuButton22.TextMarginLeft = 0;
             this.bunifuButton22.TextPadding = new System.Windows.Forms.Padding(0);
             this.bunifuButton22.UseDefaultRadiusAndThickness = true;
+            this.bunifuButton22.Click += new System.EventHandler(this.bunifuButton22_Click);
             // 
             // bunifuButton21
             // 

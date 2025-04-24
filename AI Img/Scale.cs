@@ -10,88 +10,104 @@ using System.Windows.Forms;
 
 namespace AI_Img
 {
-    public partial class Img2img : Form
+    public partial class Scale : Form
     {
         private HttpClient httpClient = new HttpClient();
         private bool isGenerating = false;
         private const string API_KEY = "a66422bf-b296-4e3e-8f91-da56f4404154";
         private Image uploadedImage = null;
-
-        string prompts;
-        string models;
-        string pr;
-        public Img2img()
+        public Scale()
         {
             InitializeComponent();
             httpClient.Timeout = TimeSpan.FromMinutes(5);
             UpdateUI();
         }
 
-        private void Img2img_Load(object sender, EventArgs e)
+        private void bunifuButton26_Click(object sender, EventArgs e)
+        {
+            Gallery main = new Gallery();
+            main.Show();
+            this.Hide();
+        }
+
+        private void bunifuButton25_Click(object sender, EventArgs e)
+        {
+            Authorization main = new Authorization();
+            main.Show();
+            this.Hide();
+        }
+
+        private void bunifuButton23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuButton21_Click(object sender, EventArgs e)
+        {
+            Main_img2img main = new Main_img2img();
+            main.Show();
+            this.Hide();
+        }
+
+        private void bunifuButton22_Click(object sender, EventArgs e)
+        {
+            Img2img main = new Img2img();
+            main.Show();
+            this.Hide();
+        }
+
+        private void Scale_Load(object sender, EventArgs e)
         {
             bunifuLabel2.Text = $"{UserData.Name}";
-                   picResult.Image = null; 
-          //  picUpload.Image = null;
+            picResult.Image = null;
+            picUpload.Image = null;
         }
 
         private async void btnGenerate_Click(object sender, EventArgs e)
         {
             if (isGenerating) return;
 
-            if (string.IsNullOrWhiteSpace(promptt.Text))
+            if (uploadedImage == null)
             {
-                lblStatus.Text = "Выберите стиль!";
+                lblStatus.Text = "Загрузите изображение для апскейла";
                 return;
             }
 
-            
-            if (promptt.Text == "В стиле аниме")
-            {
-                models = "AnimagineFlux-TA_Excl-V1.0";
-            }
-
-            if (promptt.Text == "В стиле корейских дорам")
-            {
-                models = "AsiaGirlsforYourLove-3.0";
-            }
-
             isGenerating = true;
-            btnGenerate.Enabled = false;
-            lblStatus.Text = "Генерация...";
+            btnUploadImage.Enabled = false;
+            lblStatus.Text = "Улучшение...";
             picResult.Image = null;
 
             try
             {
-                // Подготовка параметров запроса
+                // Используем параметры из документации
                 var payload = new
                 {
                     token = API_KEY,
-                    model = models,
-                    prompt = prompts = promptt.Text,
-                    negative_prompt = "low quality, blurry, bad anatomy",
-                    width = 1024,
-                    height = 1024,
-                    steps = 30,
-                    sampler = "Euler",
-                    cfg_scale = 7,
-                    seed = -1,
-                    stream = false,
+                    image = ImageToBase64(uploadedImage),
                     response_type = "url",
-                    nsfw_filter = true,
-                    send_to_gallery = false,
-                    // Параметры для img2img
-                    init_image = uploadedImage != null ? ImageToBase64(uploadedImage) : null,
-                    denoising_strength = uploadedImage != null ? 0.7 : (double?)null
+                    hr_upscaler = "R-ESRGAN 4x+", // Используем модель из документации
+                    hr_scale = 2,
+                    hr_second_pass_steps = 10,
+                    denoising_strength = 0.3,
+                    stream = false
                 };
 
                 var json = JsonSerializer.Serialize(payload);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                var response = await httpClient.PostAsync("https://neuroimg.art/api/v1/generate", content);
-                response.EnsureSuccessStatusCode();
+                // Убедитесь, что URL точно соответствует документации
+                var response = await httpClient.PostAsync("https://neuroimg.art/api/v1/upscalers", content);
+
+                // Для диагностики выведем статус код
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    throw new Exception($"Ошибка API: {response.StatusCode}\n{errorContent}");
+                }
 
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<GenerationResult>(responseContent);
+                var result = JsonSerializer.Deserialize<UpscaleResult>(responseContent);
 
                 if (!string.IsNullOrEmpty(result.image_url))
                 {
@@ -111,16 +127,15 @@ namespace AI_Img
             finally
             {
                 isGenerating = false;
-                btnGenerate.Enabled = true;
+                btnUploadImage.Enabled = true;
             }
         }
-
-
-        private class GenerationResult
+        private class UpscaleResult
         {
             public string image_url { get; set; }
-            public string image { get; set; } // Для response_type="base64"
+            public string image { get; set; }
         }
+
         private string ImageToBase64(Image image)
         {
             using (var ms = new MemoryStream())
@@ -185,7 +200,7 @@ namespace AI_Img
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
-                openFileDialog.Title = "Выберите изображение для обработки";
+                openFileDialog.Title = "Выберите изображение для улучшения";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -207,10 +222,9 @@ namespace AI_Img
         private void UpdateUI()
         {
             bool hasImage = uploadedImage != null;
-;
+/*            btnClearUpload.Enabled = hasImage;
+            btnUpscale.Enabled = hasImage;*/
             lblUploadedImage.Text = hasImage ? lblUploadedImage.Text : "Изображение не загружено";
-
-            // Можно добавить дополнительные элементы UI, которые зависят от наличия изображения
         }
 
         private void picResult_Click(object sender, EventArgs e)
@@ -273,7 +287,7 @@ namespace AI_Img
             {
                 saveFileDialog.Filter = "PNG Image|*.png|JPEG Image|*.jpg|BMP Image|*.bmp";
                 saveFileDialog.Title = "Сохранить изображение";
-                saveFileDialog.FileName = $"result_{DateTime.Now:yyyyMMddHHmmss}";
+                saveFileDialog.FileName = $"upscaled_{DateTime.Now:yyyyMMddHHmmss}";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -297,39 +311,5 @@ namespace AI_Img
             }
         }
 
-        private void bunifuButton21_Click(object sender, EventArgs e)
-        {
-            Main_img2img main = new Main_img2img();
-            main.Show();
-            this.Hide();
-        }
-
-        private void bunifuButton25_Click(object sender, EventArgs e)
-        {
-            Authorization main = new Authorization();
-            main.Show();
-            this.Hide();
-        }
-
-        private void bunifuButton26_Click(object sender, EventArgs e)
-        {
-            Gallery main = new Gallery();
-            main.Show();
-            this.Hide();
-        }
-
-        private void bunifuButton22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuButton23_Click(object sender, EventArgs e)
-        {
-            /*            Scale main = new Scale();
-                        main.Show();
-                        this.Hide();*/
-
-            MessageBox.Show("Сервис по улчшению на данный момент недоступен");
-        }
     }
 }
